@@ -93,3 +93,9 @@ MonoBehaviour:
   cards:
   - {fileID: 11400000, guid: 1a5670cd1e8b2624cb7a824b27cfefbb, type: 2}
   - {fileID: 11400000, guid: 6d83a81d0a5673e47913772aa1b664c2, type: 2}
+  - {fileID: 11400000, guid: 6df07f69444a5fd4280ebf9eac15faa9, type: 2}
+  - {fileID: 11400000, guid: fe47a98f65c47864ab49ebab52cd6f38, type: 2}
+  - {fileID: 11400000, guid: cab423b2cbf798040ac70cee9c8b0887, type: 2}
+  - {fileID: 11400000, guid: cec080c36ced51c419e5f467519b90f3, type: 2}
+  - {fileID: 11400000, guid: e3631e03d3e58f84783caa7f5c61e544, type: 2}
+  - {fileID: 11400000, guid: c295820f4f8ed684d919d5d5aa16a982, type: 2}

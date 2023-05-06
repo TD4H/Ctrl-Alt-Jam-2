@@ -25,7 +25,7 @@ public class Card : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             index++;
-            if (index > 1)
+            if (index > 7)
             {
                 index = 0;
             }
