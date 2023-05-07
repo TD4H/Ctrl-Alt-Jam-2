@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
     [SerializeField] private Image imgRenderer;
+    [SerializeField] private Sprite back;
     [SerializeField] private CardConfig[] cards;
     private Sprite front;
-    private Sprite back;
     private DamageTypes[] strongVs;
     private DamageTypes[] weakVs;
     private bool isUp = false;
@@ -44,8 +42,7 @@ public class Card : MonoBehaviour
 
     private void PopulateSelectedCard(int cardIndex)
     {
-        front = cards[cardIndex].front; 
-        back = cards[cardIndex].back;
+        front = cards[cardIndex].front;
         strongVs = cards[cardIndex].strongVs;
         weakVs = cards[cardIndex].weakVs;
     }

@@ -10,23 +10,19 @@ public class CardDeck : MonoBehaviour
 
     public static Action<int> drawCard;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         PopulateDeck();
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         PrintDeck();
     }
 
     public void DrawCard()
     {
-        int card = cards[^1];
-        //drawCard(card);
+        //drawCard(cards[^1]);
         cards.RemoveAt(cards.Count - 1);
     }
 

@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgRenderer: {fileID: 7644600843505514045}
+  back: {fileID: 21300000, guid: 251df013cbdc86f419eb07314d639d2a, type: 3}
   cards:
   - {fileID: 11400000, guid: 1a5670cd1e8b2624cb7a824b27cfefbb, type: 2}
   - {fileID: 11400000, guid: 6d83a81d0a5673e47913772aa1b664c2, type: 2}

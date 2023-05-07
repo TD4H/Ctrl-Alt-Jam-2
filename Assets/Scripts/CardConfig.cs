@@ -6,7 +6,6 @@ public class CardConfig : ScriptableObject
 {
     public Card cardPrefab;
     public Sprite front;
-    public Sprite back;
     public DamageTypes[] strongVs;
     public DamageTypes[] weakVs;
 }
