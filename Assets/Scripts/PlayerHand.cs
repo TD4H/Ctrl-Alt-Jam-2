@@ -7,7 +7,7 @@ public class PlayerHand : MonoBehaviour
     [SerializeField] private Card card;
     private List<Card> cards;
 
-    private float xPos = -300f;
+    private float xPos = 40;
 
     private void Awake()
     {
@@ -26,10 +26,18 @@ public class PlayerHand : MonoBehaviour
 
     private void ReceiveCard(int index)
     {
-        Card instance = Instantiate(card, new Vector3(xPos, 0f, 0f), Quaternion.identity);
+        UpdateCards();
+        Card instance = Instantiate(card, new Vector3((xPos*cards.Count), transform.localPosition.y, 0f), Quaternion.identity);
         instance.transform.SetParent(GameObject.Find("Canvas").transform, false);
         instance.PopulateSelectedCard(index);
         cards.Add(instance);
-        xPos += 80f;
+    }
+
+    private void UpdateCards()
+    {
+        foreach (Card card in cards)
+        {
+            card.transform.position -= new Vector3(40, 0);
+        }
     }
 }
