@@ -9,10 +9,19 @@ public class Card : MonoBehaviour
     private Sprite front;
     private DamageTypes[] strongVs;
     private DamageTypes[] weakVs;
-    private bool isUp = true;
+    private bool isUp = false;
 
     public enum DamageTypes { Light, Frost, Water, Earth, Dark, Fire, Thunder, Wind }
 
+    private void OnEnable()
+    {
+        PlayerHand.OnCardInstantiate += PopulateSelectedCard;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHand.OnCardInstantiate -= PopulateSelectedCard;
+    }
     void Update()
     {
         if (isUp)
@@ -28,10 +37,14 @@ public class Card : MonoBehaviour
         }
     }
 
-    public void PopulateSelectedCard(int cardIndex)
+    public void PopulateSelectedCard(Card card, int cardIndex, bool isPlayer)
     {
-        front = cards[cardIndex].front;
-        strongVs = cards[cardIndex].strongVs;
-        weakVs = cards[cardIndex].weakVs;
+        if (card == this)
+        {
+            isUp = isPlayer;
+            front = cards[cardIndex].front;
+            strongVs = cards[cardIndex].strongVs;
+            weakVs = cards[cardIndex].weakVs;
+        }
     }
 }

@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 
 public class CardDeck : MonoBehaviour
 {
+    [SerializeField] private bool isPlayer = false;
+    [SerializeField] private PlayerHand hand;
     private const int CARDS = 8;
     private List<int> cards;
 
-    public static Action<int> OnCardDrawn;
+    public static Action<int, bool, PlayerHand> OnCardDrawn;
 
     private void Start()
     {
@@ -18,7 +20,7 @@ public class CardDeck : MonoBehaviour
 
     public void DrawCard()
     {
-        OnCardDrawn(cards[^1]);
+        OnCardDrawn(cards[^1], isPlayer, hand);
         cards.RemoveAt(cards.Count - 1);
 
         if (cards.Count == 0)

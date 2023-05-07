@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerHand : MonoBehaviour
 {
     [SerializeField] private Card card;
     private List<Card> cards;
 
     private float xPos = 40;
+
+    public static Action<Card, int, bool> OnCardInstantiate;
 
     private void Awake()
     {
@@ -24,13 +26,16 @@ public class PlayerHand : MonoBehaviour
         CardDeck.OnCardDrawn -= ReceiveCard;
     }
 
-    private void ReceiveCard(int index)
+    private void ReceiveCard(int index, bool isPlayer, PlayerHand hand)
     {
-        UpdateCards();
-        Card instance = Instantiate(card, new Vector3((xPos*cards.Count), transform.localPosition.y, 0f), Quaternion.identity);
-        instance.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        instance.PopulateSelectedCard(index);
-        cards.Add(instance);
+        if (hand == this)
+        {
+            UpdateCards();
+            Card instance = Instantiate(card, new Vector3((xPos * cards.Count), transform.localPosition.y, 0f), Quaternion.identity);
+            instance.transform.SetParent(GameObject.Find("Canvas").transform, false);
+            OnCardInstantiate(instance, index, isPlayer);
+            cards.Add(instance);
+        }
     }
 
     private void UpdateCards()
