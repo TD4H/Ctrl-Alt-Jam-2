@@ -6,42 +6,33 @@ using UnityEngine;
 public class CardDeck : MonoBehaviour
 {
     private const int CARDS = 8;
-    private List<int> cards = new List<int>(8);
+    private List<int> cards;
 
-    public static Action<int> drawCard;
+    public static Action<int> OnCardDrawn;
 
     private void Start()
     {
+        cards = new List<int>(8);
         PopulateDeck();
-    }
-
-    private void Update()
-    {
-        PrintDeck();
     }
 
     public void DrawCard()
     {
-        //drawCard(cards[^1]);
+        OnCardDrawn(cards[^1]);
         cards.RemoveAt(cards.Count - 1);
+
+        if (cards.Count == 0)
+            Destroy(gameObject);
     }
 
     private void PopulateDeck()
     {
-        for(int i = 0; i< CARDS; i++)
+        for(int i = 0; i < CARDS; i++)
         {
             cards.Add(i);
         }
 
         ShuffleList();
-    }
-
-    private void PrintDeck()
-    {
-        foreach (int i in cards)
-        {
-            Debug.Log(i.ToString());
-        }
     }
 
     private void ShuffleList()
@@ -54,5 +45,4 @@ public class CardDeck : MonoBehaviour
             cards[randomIndex] = temp;
         }
     }
-
 }
