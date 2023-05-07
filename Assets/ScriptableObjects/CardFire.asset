@@ -16,4 +16,8 @@ MonoBehaviour:
   front: {fileID: 21300000, guid: b49ef0ec87b71a445ade9bd1e2870345, type: 3}
   back: {fileID: 21300000, guid: 251df013cbdc86f419eb07314d639d2a, type: 3}
   strongVs: 000000000700000003000000
+<<<<<<< HEAD
   weakVs: 040000000200000006000000
+=======
+  weakVs: 060000000400000002000000
+>>>>>>> 54ac0434c4cfea8d558d9ff1328c3ac3c492f9b8

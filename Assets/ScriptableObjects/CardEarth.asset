@@ -15,5 +15,9 @@ MonoBehaviour:
   cardPrefab: {fileID: 7644600843505514044, guid: 0ced4b76ca5cc034290b6a48530d1572, type: 3}
   front: {fileID: 21300000, guid: 1873acf819d7d1a408ef9edf839950ab, type: 3}
   back: {fileID: 21300000, guid: 251df013cbdc86f419eb07314d639d2a, type: 3}
+<<<<<<< HEAD
   strongVs: 040000000600000001000000
+=======
+  strongVs: 060000000400000001000000
+>>>>>>> 54ac0434c4cfea8d558d9ff1328c3ac3c492f9b8
   weakVs: 000000000500000002000000
