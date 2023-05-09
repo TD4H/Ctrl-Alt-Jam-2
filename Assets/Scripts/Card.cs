@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
     [SerializeField] private Image imgRenderer;
+    [SerializeField] private Button buttonComp;
     [SerializeField] private Sprite back;
     [SerializeField] private CardConfig[] cards;
     private Sprite front;
@@ -56,5 +57,6 @@ public class Card : MonoBehaviour
     public void SelectCard()
     {
         OnCardSelect(this, hand);
+        Destroy(buttonComp);
     }
 }
