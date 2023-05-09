@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class EnemyHand : PlayerHand
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void ReceiveCard(int index, bool isPlayer, PlayerHand hand)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (hand == this)
+        {
+            Card instance = Instantiate(card, new Vector3(0f, transform.localPosition.y, 0f), Quaternion.Euler(new Vector3(0f, 0f, 180f)));
+            instance.transform.SetParent(GameObject.Find("EnemyHand").transform, false);
+            OnCardInstantiate(instance, index, isPlayer, this);
+            cards.Add(instance);
+        }
     }
 }

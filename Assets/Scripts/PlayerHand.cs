@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class PlayerHand : MonoBehaviour
 {
-    [SerializeField] private Card card;
-    private List<Card> cards;
-
-    private float xPos = 40;
+    [SerializeField] protected Card card;
+    protected List<Card> cards;
 
     public static Action<Card, int, bool, PlayerHand> OnCardInstantiate;
 
@@ -28,38 +26,14 @@ public class PlayerHand : MonoBehaviour
         Card.OnCardSelect -= SummonCard;
     }
 
-    private void ReceiveCard(int index, bool isPlayer, PlayerHand hand)
+    protected virtual void ReceiveCard(int index, bool isPlayer, PlayerHand hand)
     {
         if (hand == this)
         {
-            UpdateReceivedCards();
-            Card instance = Instantiate(card, new Vector3((xPos * cards.Count), transform.localPosition.y, 0f), Quaternion.identity);
-            instance.transform.SetParent(GameObject.Find("Canvas").transform, false);
+            Card instance = Instantiate(card, new Vector3(0f, transform.localPosition.y, 0f), Quaternion.identity);
+            instance.transform.SetParent(GameObject.Find("PlayerHand").transform, false);
             OnCardInstantiate(instance, index, isPlayer, this);
             cards.Add(instance);
-        }
-    }
-
-    private void UpdateReceivedCards()
-    {
-        foreach (Card card in cards)
-        {
-            card.transform.position -= new Vector3(40, 0);
-        }
-    }
-
-    private void UpdateRemovedCards(int index)
-    {
-        for (int i = 0; i < cards.Count; i++)
-        {
-            if(i < index)
-            {
-                cards[i].transform.position += new Vector3(40, 0);
-            }
-            else
-            {
-                cards[i].transform.position -= new Vector3(40, 0);
-            }
         }
     }
 
@@ -67,9 +41,7 @@ public class PlayerHand : MonoBehaviour
     {
         if (hand == this)
         {
-            int index = cards.IndexOf(card);
             cards.Remove(card);
-            UpdateRemovedCards(index);
         }
     }
 }
