@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 7644600843505514044, guid: 0ced4b76ca5cc034290b6a48530d1572, type: 3}
   front: {fileID: 21300000, guid: b49ef0ec87b71a445ade9bd1e2870345, type: 3}
-  back: {fileID: 21300000, guid: 251df013cbdc86f419eb07314d639d2a, type: 3}
+  cardType: 5
   strongVs: 000000000700000003000000
   weakVs: 040000000200000006000000
