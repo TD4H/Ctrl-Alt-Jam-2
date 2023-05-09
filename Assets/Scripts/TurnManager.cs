@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private PlayerHand hand;
+    private bool isPlayerTurn;
+
+    public static Action<PlayerHand, bool> OnTurnSwitch;
+
+    private void OnEnable()
     {
-        
+        PlayerHand.OnEndTurn += SwitchTurns;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        PlayerHand.OnEndTurn -= SwitchTurns;
+    }
+
+    private void SwitchTurns()
+    {
+        if (isPlayerTurn)
+            isPlayerTurn = false;
+        else
+            isPlayerTurn = true;
     }
 }

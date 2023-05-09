@@ -8,6 +8,7 @@ public class PlayerHand : MonoBehaviour
     protected List<Card> cards;
 
     public static Action<Card, int, bool, PlayerHand> OnCardInstantiate;
+    public static Action OnEndTurn;
 
     private void Awake()
     {
@@ -42,6 +43,15 @@ public class PlayerHand : MonoBehaviour
         if (hand == this)
         {
             cards.Remove(card);
+            //OnEndTurn();
+        }
+    }
+
+    private void DisableActions()
+    {
+        foreach (Card card in cards)
+        {
+            card.ButtonSwitch(false);
         }
     }
 }

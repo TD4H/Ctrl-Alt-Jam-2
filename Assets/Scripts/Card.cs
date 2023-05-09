@@ -88,4 +88,9 @@ public class Card : MonoBehaviour
         if (card == this)
             isUp = true;
     }
+
+    public void ButtonSwitch(bool state)
+    {
+        buttonComp.enabled = state;
+    }
 }
