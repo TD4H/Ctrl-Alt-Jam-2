@@ -18,13 +18,26 @@ public class CardDeck : MonoBehaviour
         PopulateDeck();
     }
 
-    public void DrawCard()
+    private void OnEnable()
     {
-        OnCardDrawn(cards[^1], isPlayer, hand);
-        cards.RemoveAt(cards.Count - 1);
+        TurnManager.OnDrawNeeded += DrawCard;
+    }
 
-        if (cards.Count == 0)
-            Destroy(gameObject);
+    private void OnDisable()
+    {
+        TurnManager.OnDrawNeeded -= DrawCard;
+    }
+
+    public void DrawCard(PlayerHand hand)
+    {
+        if (hand == this.hand)
+        {
+            OnCardDrawn(cards[^1], isPlayer, this.hand);
+            cards.RemoveAt(cards.Count - 1);
+
+            if (cards.Count == 0)
+                Destroy(gameObject);
+        }
     }
 
     private void PopulateDeck()

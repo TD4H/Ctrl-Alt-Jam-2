@@ -43,15 +43,7 @@ public class PlayerHand : MonoBehaviour
         if (hand == this)
         {
             cards.Remove(card);
-            //OnEndTurn();
-        }
-    }
-
-    private void DisableActions()
-    {
-        foreach (Card card in cards)
-        {
-            card.ButtonSwitch(false);
+            OnEndTurn();
         }
     }
 }

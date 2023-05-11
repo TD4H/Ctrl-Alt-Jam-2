@@ -102,6 +102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cec080c36ced51c419e5f467519b90f3, type: 2}
   - {fileID: 11400000, guid: e3631e03d3e58f84783caa7f5c61e544, type: 2}
   - {fileID: 11400000, guid: c295820f4f8ed684d919d5d5aa16a982, type: 2}
+  cardType: 0
 --- !u!114 &-5279411481160387543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7644600843505514044}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
-        m_MethodName: SelectCard
+        m_MethodName: CardOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

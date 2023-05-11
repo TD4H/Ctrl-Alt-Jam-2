@@ -22,12 +22,14 @@ public class GameTable : MonoBehaviour
     {
         Card.OnCardSelect += PlaceCard;
         Card.OnCardDefeat += RemoveCard;
+        TurnManager.OnBattleCall += StartBattle;
     }
 
     private void OnDisable()
     {
         Card.OnCardSelect -= PlaceCard;
         Card.OnCardDefeat -= RemoveCard;
+        TurnManager.OnBattleCall -= StartBattle;
     }
 
     private void PlaceCard(Card card, PlayerHand hand)
@@ -48,7 +50,7 @@ public class GameTable : MonoBehaviour
         }
     }
 
-    public void StartBattle()
+    private void StartBattle()
     {
         OnBattleStart(playerCards[0], enemyCards[0], pDiscard, eDiscard);
     }

@@ -14,18 +14,21 @@ public class Card : MonoBehaviour
     private DamageTypes[] strongVs;
     private DamageTypes[] weakVs;
     private bool isUp = false;
+    private bool isFirstCheck = true;
     private PlayerHand hand;
 
     public enum DamageTypes { Light, Frost, Water, Earth, Dark, Fire, Thunder, Wind }
     
     public static Action<Card, PlayerHand> OnCardSelect;
     public static Action<Card> OnCardDefeat;
+    public static Action<PlayerHand> OnCardCheck;
 
     private void OnEnable()
     {
         PlayerHand.OnCardInstantiate += PopulateSelectedCard;
         GameTable.OnBattleStart += VerifyWeakness;
         GameTable.OnCardReady += FlipCard;
+        TurnManager.OnCastleDraw += SelectCard;
     }
 
     private void OnDisable()
@@ -33,6 +36,7 @@ public class Card : MonoBehaviour
         PlayerHand.OnCardInstantiate -= PopulateSelectedCard;
         GameTable.OnBattleStart -= VerifyWeakness;
         GameTable.OnCardReady -= FlipCard;
+        TurnManager.OnCastleDraw -= SelectCard;
     }
     void Update()
     {
@@ -40,13 +44,8 @@ public class Card : MonoBehaviour
             imgRenderer.sprite = front;
         else imgRenderer.sprite = back;
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            if (isUp)
-                isUp = false;
-            else
-                isUp = true;
-        }
+        if (TurnManager.currentStage != GameStage.CastleDraw)
+            isFirstCheck = false;
     }
 
     public void PopulateSelectedCard(Card card, int cardIndex, bool isPlayer, PlayerHand hand)
@@ -62,7 +61,17 @@ public class Card : MonoBehaviour
         }
     }
 
-    public void SelectCard()
+    public void CardOnClick()
+    {
+        if (hand == TurnManager.playerOne && TurnManager.currentStage != GameStage.CardSelectP1)
+            return;
+        else if (hand != TurnManager.playerOne && TurnManager.currentStage != GameStage.CardSelectP2)
+            return;
+
+        SelectCard();
+    }
+
+    private void SelectCard()
     {
         isUp = false;
         OnCardSelect(this, hand);
@@ -73,13 +82,29 @@ public class Card : MonoBehaviour
     {
         if (this == pCard && (weakVs.Contains(eCard.cardType) || !(weakVs.Contains(eCard.cardType) || strongVs.Contains(eCard.cardType))))
         {
-            transform.localPosition = pDiscard.localPosition;
-            OnCardDefeat(this);
+            if (!isFirstCheck)
+            {
+                transform.localPosition = pDiscard.localPosition;
+                OnCardDefeat(this);
+            }
+            else
+            {
+                isFirstCheck = false;
+                OnCardCheck(hand);
+            }
         }
-        else if (this == eCard && (weakVs.Contains(pCard.cardType) || !(weakVs.Contains(pCard.cardType) || strongVs.Contains(pCard.cardType)))) 
+        else if (this == eCard && (weakVs.Contains(pCard.cardType) || !(weakVs.Contains(pCard.cardType) || strongVs.Contains(pCard.cardType))))
         {
-            transform.localPosition = eDiscard.localPosition;
-            OnCardDefeat(this);
+            if (!isFirstCheck) 
+            {
+                transform.localPosition = eDiscard.localPosition;
+                OnCardDefeat(this);
+            }
+            else
+            {
+                isFirstCheck = false;
+                OnCardCheck(hand);
+            }
         }
     }
 
@@ -87,10 +112,5 @@ public class Card : MonoBehaviour
     {
         if (card == this)
             isUp = true;
-    }
-
-    public void ButtonSwitch(bool state)
-    {
-        buttonComp.enabled = state;
     }
 }
