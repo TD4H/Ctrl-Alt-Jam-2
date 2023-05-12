@@ -12,11 +12,13 @@ public class GameTable : MonoBehaviour
     [SerializeField] private Transform eCastle;
     [SerializeField] private Transform pDiscard;
     [SerializeField] private Transform eDiscard;
-    private List<Card> playerCards = new List<Card>();
-    private List<Card> enemyCards = new List<Card>();
+    private List<Card> playerCards = new();
+    private List<Card> enemyCards = new();
 
     public static Action<Card, Card, Transform, Transform> OnBattleStart;
     public static Action<Card> OnCardReady;
+    public static Action OnPlacementDone;
+    public static Action<PlayerHand> OnBattleEnd;
 
     private void OnEnable()
     {
@@ -48,11 +50,15 @@ public class GameTable : MonoBehaviour
             card.transform.localPosition = eCastle.localPosition - new Vector3((enemyCards.Count - 1) * 80f, 0f);
             FlipCard(card);
         }
+
+        if (playerCards.Count >= 3 && enemyCards.Count >= 3)
+            OnPlacementDone();
     }
 
     private void StartBattle()
     {
-        OnBattleStart(playerCards[0], enemyCards[0], pDiscard, eDiscard);
+        if (playerCards.Count > 0 && enemyCards.Count > 0)
+            OnBattleStart(playerCards[0], enemyCards[0], pDiscard, eDiscard);
     }
 
     public void FlipCard(Card card)
@@ -78,6 +84,13 @@ public class GameTable : MonoBehaviour
             if (enemyCards.Count != 0)
                 UpdateCardPositions(enemyCards, eCastle);
         }
+
+        if (playerCards.Count != 0 && enemyCards.Count != 0)
+            OnPlacementDone();
+        else if (playerCards.Count > enemyCards.Count)
+            OnBattleEnd(pHand);
+        else
+            OnBattleEnd(eHand);
     }
 
     private void UpdateCardPositions(List<Card> listToUpdate, Transform castle)

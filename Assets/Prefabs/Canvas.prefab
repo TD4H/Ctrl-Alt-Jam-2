@@ -749,12 +749,71 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 776346630121592967, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: eHand
+      value: 
+      objectReference: {fileID: 5514879257248107175}
+    - target: {fileID: 776346630121592967, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: pHand
+      value: 
+      objectReference: {fileID: 5514879257848952938}
+    - target: {fileID: 776346630121592967, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 5514879257544152627}
+    - target: {fileID: 776346630121592967, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: turnText
+      value: 
+      objectReference: {fileID: 2953728472465008616}
+    - target: {fileID: 776346630121592967, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: resultScreen
+      value: 
+      objectReference: {fileID: 7681270051754238542, guid: 79ebbae4c5a67824ca3e55d31a4378c4, type: 3}
+    - target: {fileID: 776346630121592967, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: overlayScreen
+      value: 
+      objectReference: {fileID: 7681270051754238542, guid: 79ebbae4c5a67824ca3e55d31a4378c4, type: 3}
+    - target: {fileID: 1513160187505322903, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 285.9738
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513160187505322903, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 38.6461
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513160187505322903, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -186
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024635443617599475, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024635443617599475, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: m_margin.y
+      value: 1.259778
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024635443617599475, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 7051645001706604642, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
       propertyPath: m_Name
       value: TurnManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+--- !u!114 &2953728472465008616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6024635443617599475, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
+  m_PrefabInstance: {fileID: 8891810325980375067}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8654845837104615849 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 250580965705284018, guid: 4c84180779755df44a1435e68ba6568e, type: 3}
