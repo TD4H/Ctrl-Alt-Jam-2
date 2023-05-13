@@ -17,7 +17,7 @@ public class GameTable : MonoBehaviour
 
     public static Action<Card, Card, Transform, Transform> OnBattleStart;
     public static Action<Card> OnCardReady;
-    public static Action OnPlacementDone;
+    public static Action OnBattleRequest;
     public static Action<PlayerHand> OnBattleEnd;
 
     private void OnEnable()
@@ -36,23 +36,20 @@ public class GameTable : MonoBehaviour
 
     private void PlaceCard(Card card, PlayerHand hand)
     {
-        if (hand == pHand)
-        {
-            playerCards.Add(card);
-            card.transform.SetParent(canvas, false);
-            card.transform.localPosition = pCastle.localPosition + new Vector3((playerCards.Count - 1) * 80f, 0f);
-            FlipCard(card);
-        }
-        else if (hand == eHand)
+        if (hand == eHand)
         {
             enemyCards.Add(card);
             card.transform.SetParent(canvas, false);
             card.transform.localPosition = eCastle.localPosition - new Vector3((enemyCards.Count - 1) * 80f, 0f);
             FlipCard(card);
         }
-
-        if (playerCards.Count >= 3 && enemyCards.Count >= 3)
-            OnPlacementDone();
+        else if (hand == pHand)
+        {
+            playerCards.Add(card);
+            card.transform.SetParent(canvas, false);
+            card.transform.localPosition = pCastle.localPosition + new Vector3((playerCards.Count - 1) * 80f, 0f);
+            FlipCard(card);
+        }
     }
 
     private void StartBattle()
@@ -86,7 +83,7 @@ public class GameTable : MonoBehaviour
         }
 
         if (playerCards.Count != 0 && enemyCards.Count != 0)
-            OnPlacementDone();
+            OnBattleRequest();
         else if (playerCards.Count > enemyCards.Count)
             OnBattleEnd(pHand);
         else
@@ -108,5 +105,13 @@ public class GameTable : MonoBehaviour
         }
 
         FlipCard(listToUpdate[0]);
+    }
+
+    public bool IsTableFull()
+    {
+        if (playerCards.Count >= 3 && enemyCards.Count >= 3)
+            return true;
+        else 
+            return false;
     }
 }

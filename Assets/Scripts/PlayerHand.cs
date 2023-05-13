@@ -15,13 +15,13 @@ public class PlayerHand : MonoBehaviour
         cards = new List<Card>();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         CardDeck.OnCardDrawn += ReceiveCard;
         Card.OnCardSelect += SummonCard;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         CardDeck.OnCardDrawn -= ReceiveCard;
         Card.OnCardSelect -= SummonCard;

@@ -26,6 +26,7 @@ public class Card : MonoBehaviour
     private void OnEnable()
     {
         PlayerHand.OnCardInstantiate += PopulateSelectedCard;
+        EnemyHand.OnCardChosen += EnemySelectCard;
         GameTable.OnBattleStart += VerifyWeakness;
         GameTable.OnCardReady += FlipCard;
         TurnManager.OnCastleDraw += SelectCard;
@@ -34,6 +35,7 @@ public class Card : MonoBehaviour
     private void OnDisable()
     {
         PlayerHand.OnCardInstantiate -= PopulateSelectedCard;
+        EnemyHand.OnCardChosen -= EnemySelectCard;
         GameTable.OnBattleStart -= VerifyWeakness;
         GameTable.OnCardReady -= FlipCard;
         TurnManager.OnCastleDraw -= SelectCard;
@@ -69,6 +71,12 @@ public class Card : MonoBehaviour
             return;
 
         SelectCard();
+    }
+
+    private void EnemySelectCard(Card selectedCard)
+    {
+        if (selectedCard == this)
+            SelectCard();
     }
 
     private void SelectCard()

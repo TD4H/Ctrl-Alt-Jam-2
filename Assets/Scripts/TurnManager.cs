@@ -7,6 +7,7 @@ public enum GameStage { CastleDraw, HandDraw, CardSelectP1, CardSelectP2, Battle
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
+    [SerializeField] private GameTable gameTable;
     [SerializeField] private PlayerHand pHand;
     [SerializeField] private EnemyHand eHand;
     [SerializeField] private OverlayScreen overlayScreen;
@@ -20,6 +21,7 @@ public class TurnManager : MonoBehaviour
     public static Action OnBattleCall;
     public static Action OnVictory;
     public static Action OnDefeat;
+    public static Action OnEnemyTurn;
 
     private void Start()
     {
@@ -29,17 +31,17 @@ public class TurnManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerHand.OnEndTurn += SwitchTurns;
+        PlayerHand.OnEndTurn += DelaySwitchTurns;
         Card.OnCardCheck += SetFirstPlayer;
-        GameTable.OnPlacementDone += ReceiveBattleRequest;
+        GameTable.OnBattleRequest += ReceiveBattleRequest;
         GameTable.OnBattleEnd += AnnounceWinner;
     }
 
     private void OnDisable()
     {
-        PlayerHand.OnEndTurn -= SwitchTurns;
+        PlayerHand.OnEndTurn -= DelaySwitchTurns;
         Card.OnCardCheck -= SetFirstPlayer;
-        GameTable.OnPlacementDone -= ReceiveBattleRequest;
+        GameTable.OnBattleRequest -= ReceiveBattleRequest;
         GameTable.OnBattleEnd -= AnnounceWinner;
     }
 
@@ -48,10 +50,18 @@ public class TurnManager : MonoBehaviour
         startingPlayer = losingHand;
     }
 
+    private void DelaySwitchTurns() => Invoke(nameof(SwitchTurns), 0.3f);
+
     private void SwitchTurns()
     {
         if (currentStage != GameStage.CardSelectP1 && currentStage != GameStage.CardSelectP2) 
             return;
+
+        if (gameTable.IsTableFull())
+        {
+            ReceiveBattleRequest();
+            return;
+        }
 
         if (currentStage == GameStage.CardSelectP1)
             CardSelectP2();
@@ -95,14 +105,16 @@ public class TurnManager : MonoBehaviour
     {
         currentStage = GameStage.CardSelectP1;
 
-        Instantiate(overlayScreen, canvas.transform);
+        Invoke(nameof(InstantiateOverlayScreen), 0.2f);
     }
 
     private void CardSelectP2()
     {
         currentStage = GameStage.CardSelectP2;
 
-        Instantiate(overlayScreen, canvas.transform);
+        Invoke(nameof(InstantiateOverlayScreen), 0.2f);
+
+        OnEnemyTurn();
     }
 
     private void ReceiveBattleRequest()
@@ -116,7 +128,7 @@ public class TurnManager : MonoBehaviour
         {
             startClash = false;
             currentStage = GameStage.Battle;
-            Instantiate(overlayScreen, canvas.transform); 
+            Invoke(nameof(InstantiateOverlayScreen), 0.2f);
             yield return new WaitForSeconds(4f);
         }
         else
@@ -132,6 +144,11 @@ public class TurnManager : MonoBehaviour
         else
             currentStage = GameStage.Defeat;
 
+        Invoke(nameof(InstantiateOverlayScreen), 0.2f);
+    }
+
+    private void InstantiateOverlayScreen()
+    {
         Instantiate(overlayScreen, canvas.transform);
     }
 }
