@@ -40,6 +40,7 @@ public class Card : MonoBehaviour
         GameTable.OnCardReady -= FlipCard;
         TurnManager.OnCastleDraw -= SelectCard;
     }
+
     void Update()
     {
         if (isUp)
