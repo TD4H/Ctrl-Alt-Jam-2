@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OverlayScreen : MonoBehaviour
 {
-    [SerializeField] private Image self;
+    [SerializeField] private Image overlay;
+    [SerializeField] private Image border;
     [SerializeField] private TMPro.TextMeshProUGUI resultText;
 
     private void Start()
@@ -60,17 +62,27 @@ public class OverlayScreen : MonoBehaviour
     {
         resultText.text = "Victory!";
         TurnOverlayOn();
+
+        Invoke(nameof(CallMenu), 2f);
     }
 
     private void CallDefeat()
     {
         resultText.text = "Defeat!";
         TurnOverlayOn();
+
+        Invoke(nameof(CallMenu), 2f);
     }
 
     private void TurnOverlayOn()
     {
-        self.enabled = true;
+        overlay.enabled = true;
+        border.enabled = true;
         resultText.enabled = true;
+    }
+
+    private void CallMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }
