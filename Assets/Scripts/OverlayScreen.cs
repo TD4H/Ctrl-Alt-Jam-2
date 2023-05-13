@@ -63,7 +63,7 @@ public class OverlayScreen : MonoBehaviour
         resultText.text = "Victory!";
         TurnOverlayOn();
 
-        Invoke(nameof(CallMenu), 2f);
+        Invoke(nameof(CallMenu), 4f);
     }
 
     private void CallDefeat()
@@ -71,7 +71,7 @@ public class OverlayScreen : MonoBehaviour
         resultText.text = "Defeat!";
         TurnOverlayOn();
 
-        Invoke(nameof(CallMenu), 2f);
+        Invoke(nameof(CallMenu), 4f);
     }
 
     private void TurnOverlayOn()

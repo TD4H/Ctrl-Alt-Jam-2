@@ -9,6 +9,7 @@ public class Card : MonoBehaviour
     [SerializeField] private Button buttonComp;
     [SerializeField] private Sprite back;
     [SerializeField] private CardConfig[] cards;
+    [SerializeField] private CardOverlay cardOverlay;
     [HideInInspector] public DamageTypes cardType;
     private Sprite front;
     private DamageTypes[] strongVs;
@@ -16,12 +17,15 @@ public class Card : MonoBehaviour
     private bool isUp = false;
     private bool isFirstCheck = true;
     private PlayerHand hand;
+    private CardOverlay overlayInstance;
 
     public enum DamageTypes { Light, Frost, Water, Earth, Dark, Fire, Thunder, Wind }
     
     public static Action<Card, PlayerHand> OnCardSelect;
     public static Action<Card> OnCardDefeat;
     public static Action<PlayerHand> OnCardCheck;
+    public static Action<Sprite> OnCardHover;
+    public static Action OnHoverExit;
 
     private void OnEnable()
     {
@@ -39,6 +43,24 @@ public class Card : MonoBehaviour
         GameTable.OnBattleStart -= VerifyWeakness;
         GameTable.OnCardReady -= FlipCard;
         TurnManager.OnCastleDraw -= SelectCard;
+    }
+
+    public void PointerEnter()
+    {
+        if ((hand == TurnManager.playerOne || isUp) && TurnManager.currentStage == GameStage.CardSelectP1)
+        {
+            overlayInstance = Instantiate(cardOverlay, GameObject.Find("Canvas").transform);
+            OnCardHover(front);
+        }
+    }
+
+    public void PointerExit()
+    {
+        if (overlayInstance != null)
+        {
+            overlayInstance = null;
+            OnHoverExit();
+        }
     }
 
     void Update()

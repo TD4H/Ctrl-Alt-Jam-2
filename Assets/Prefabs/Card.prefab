@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7644600843505514045}
   - component: {fileID: 7644600843505514044}
   - component: {fileID: -5279411481160387543}
+  - component: {fileID: -6110041535472164465}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -102,6 +103,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cec080c36ced51c419e5f467519b90f3, type: 2}
   - {fileID: 11400000, guid: e3631e03d3e58f84783caa7f5c61e544, type: 2}
   - {fileID: 11400000, guid: c295820f4f8ed684d919d5d5aa16a982, type: 2}
+  cardOverlay: {fileID: 7909527452944004661, guid: e2d0f6c660928844db996b8372771dfb, type: 3}
   cardType: 0
 --- !u!114 &-5279411481160387543
 MonoBehaviour:
@@ -159,3 +161,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-6110041535472164465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644600843505514046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7644600843505514044}
+          m_TargetAssemblyTypeName: Card, Assembly-CSharp
+          m_MethodName: PointerEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7644600843505514044}
+          m_TargetAssemblyTypeName: Card, Assembly-CSharp
+          m_MethodName: PointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
