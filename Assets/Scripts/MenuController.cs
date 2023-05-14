@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour
         animator.SetTrigger("StartGame");
     }
 
-    private void ChangeScenes(string sceneName)
+    public void ChangeScenes(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
