@@ -8,8 +8,9 @@ public class Card : MonoBehaviour
     [SerializeField] private Image imgRenderer;
     [SerializeField] private Button buttonComp;
     [SerializeField] private Sprite back;
-    [SerializeField] private CardConfig[] cards;
     [SerializeField] private CardOverlay cardOverlay;
+    [SerializeField] private CardConfig[] cards;
+    [SerializeField] private AudioClip[] sfxList;
     [HideInInspector] public DamageTypes cardType;
     private Sprite front;
     private DamageTypes[] strongVs;

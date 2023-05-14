@@ -94,6 +94,7 @@ MonoBehaviour:
   imgRenderer: {fileID: 7644600843505514045}
   buttonComp: {fileID: -5279411481160387543}
   back: {fileID: 21300000, guid: 251df013cbdc86f419eb07314d639d2a, type: 3}
+  cardOverlay: {fileID: 7909527452944004661, guid: e2d0f6c660928844db996b8372771dfb, type: 3}
   cards:
   - {fileID: 11400000, guid: 1a5670cd1e8b2624cb7a824b27cfefbb, type: 2}
   - {fileID: 11400000, guid: 6d83a81d0a5673e47913772aa1b664c2, type: 2}
@@ -103,7 +104,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cec080c36ced51c419e5f467519b90f3, type: 2}
   - {fileID: 11400000, guid: e3631e03d3e58f84783caa7f5c61e544, type: 2}
   - {fileID: 11400000, guid: c295820f4f8ed684d919d5d5aa16a982, type: 2}
-  cardOverlay: {fileID: 7909527452944004661, guid: e2d0f6c660928844db996b8372771dfb, type: 3}
+  sfxList:
+  - {fileID: 8300000, guid: 61c9c6c7867ae17488e1dc90de47dfd7, type: 3}
+  - {fileID: 8300000, guid: 8ed623dc637f2bc43a01879ec3c334d7, type: 3}
+  - {fileID: 8300000, guid: d7e654c37bd04c042b86c1f8aa5048fe, type: 3}
   cardType: 0
 --- !u!114 &-5279411481160387543
 MonoBehaviour:
